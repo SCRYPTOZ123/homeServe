@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeServe - My Bookings</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">HomeServe</div>
+                <ul class="nav-links">
+                    <li><a href="home.html">Services</a></li>
+                    <li><a href="bookings.html" class="active">My Bookings</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>My Bookings</h1>
+            <p>Track and manage your service bookings</p>
+        </div>
+    </section>
+
+    <section class="bookings-section">
+        <div class="container">
+            <div class="bookings-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="Confirmed">Confirmed</button>
+                <button class="filter-btn" data-filter="Completed">Completed</button>
+                <button class="filter-btn" data-filter="Cancelled">Cancelled</button>
+            </div>
+
+            <div id="bookings-container">
+                <p class="empty-message">No bookings yet. Book a service to get started!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 HomeServe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

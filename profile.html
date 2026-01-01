@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeServe - Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">HomeServe</div>
+                <ul class="nav-links">
+                    <li><a href="home.html">Services</a></li>
+                    <li><a href="bookings.html">My Bookings</a></li>
+                    <li><a href="profile.html" class="active">Profile</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>My Profile</h1>
+            <p>Manage your account information</p>
+        </div>
+    </section>
+
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-grid">
+                <!-- Profile Info Card -->
+                <div class="profile-card">
+                    <div class="form-group">
+                        <label for="profile-picture-url">Profile Picture URL</label>
+                        <input type="url" id="profile-picture-url" placeholder="https://example.com/image.jpg">
+                        <button type="button" id="update-picture-url" class="btn-primary" style="margin-top: 0.5rem;">Update Picture</button>
+                    </div>
+                    
+                    <div class="profile-avatar">
+                        <div class="avatar-circle">
+                            <span id="avatar-initial">U</span>
+                            
+                        </div>
+                    </div>
+                    <h2 id="profile-name">User Name</h2>
+                    <p id="profile-email" class="profile-email">user@email.com</p>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-value" id="total-bookings">0</span>
+                            <span class="stat-label">Total Bookings</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="completed-bookings">0</span>
+                            <span class="stat-label">Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Profile Form -->
+                <div class="profile-card">
+                    <h3>Edit Profile</h3>
+                    <form id="profile-form">
+                        <div class="form-group">
+                            <label for="edit-name">Full Name</label>
+                            <input type="text" id="edit-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-phone">Phone Number</label>
+                            <input type="tel" id="edit-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-address">Default Address</label>
+                            <textarea id="edit-address" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Update Profile</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="profile-card activity-card">
+                <h3>Recent Activity</h3>
+                <div id="recent-activity">
+                    <p class="empty-message">No recent activity</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 HomeServe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

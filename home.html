@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeServe - Services</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">HomeServe</div>
+                <ul class="nav-links">
+                    <li><a href="home.html" class="active">Services</a></li>
+                    <li><a href="bookings.html">My Bookings</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Quality Home Services at Your Doorstep</h1>
+            <p>Book trusted professionals for all your home service needs</p>
+            <p class="welcome-text">Welcome, <span id="user-name"></span>!</p>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="service-grid">
+                <div class="service-card" data-service="Bathroom Cleaning" data-price="499">
+                    <div class="service-icon">🚿</div>
+                    <h3>Bathroom Cleaning</h3>
+                    <p>Deep cleaning of bathroom, tiles, and fixtures</p>
+                    <p class="price">₹499</p>
+                    <button class="btn-book">Book Now</button>
+                </div>
+
+                <div class="service-card" data-service="Kitchen Cleaning" data-price="599">
+                    <div class="service-icon">🍳</div>
+                    <h3>Kitchen Cleaning</h3>
+                    <p>Complete kitchen cleaning including appliances</p>
+                    <p class="price">₹599</p>
+                    <button class="btn-book">Book Now</button>
+                </div>
+
+                <div class="service-card" data-service="Home Cleaning" data-price="799">
+                    <div class="service-icon">🏠</div>
+                    <h3>Home Cleaning</h3>
+                    <p>Full house cleaning service (2BHK)</p>
+                    <p class="price">₹799</p>
+                    <button class="btn-book">Book Now</button>
+                </div>
+
+                <div class="service-card" data-service="Plumbing" data-price="399">
+                    <div class="service-icon">🔧</div>
+                    <h3>Plumbing</h3>
+                    <p>Fix leaks, pipes, and water systems</p>
+                    <p class="price">₹399</p>
+                    <button class="btn-book">Book Now</button>
+                </div>
+
+                <div class="service-card" data-service="Electrical Work" data-price="349">
+                    <div class="service-icon">💡</div>
+                    <h3>Electrical Work</h3>
+                    <p>Wiring, switches, and fixture installation</p>
+                    <p class="price">₹349</p>
+                    <button class="btn-book">Book Now</button>
+                </div>
+
+                <div class="service-card" data-service="AC Repair" data-price="699">
+                    <div class="service-icon">❄️</div>
+                    <h3>AC Repair</h3>
+                    <p>AC servicing and repair by experts</p>
+                    <p class="price">₹699</p>
+                    <button class="btn-book">Book Now</button>
+                </div>
+
+                <div class="service-card" data-service="Painting" data-price="899">
+                    <div class="service-icon">🎨</div>
+                    <h3>Painting</h3>
+                    <p>Professional wall painting services</p>
+                    <p class="price">₹899</p>
+                    <button class="btn-book">Book Now</button>
+                </div>
+
+                <div class="service-card" data-service="Pest Control" data-price="449">
+                    <div class="service-icon">🐛</div>
+                    <h3>Pest Control</h3>
+                    <p>Complete pest control and prevention</p>
+                    <p class="price">₹449</p>
+                    <button class="btn-book">Book Now</button>
+                </div>
+
+                <div class="service-card" data-service="Carpentry" data-price="549">
+                    <div class="service-icon">🪚</div>
+                    <h3>Carpentry</h3>
+                    <p>Furniture repair and woodwork services</p>
+                    <p class="price">₹549</p>
+                    <button class="btn-book">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Book Service</h2>
+            <form id="booking-form">
+                <div class="form-group">
+                    <label>Service:</label>
+                    <input type="text" id="service-name" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Price:</label>
+                    <input type="text" id="service-price" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="booking-address">Address:</label>
+                    <textarea id="booking-address" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="booking-date">Preferred Date:</label>
+                    <input type="date" id="booking-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="booking-time">Preferred Time:</label>
+                    <select id="booking-time" required>
+                        <option value="">Select time</option>
+                        <option value="9:00 AM">9:00 AM</option>
+                        <option value="11:00 AM">11:00 AM</option>
+                        <option value="2:00 PM">2:00 PM</option>
+                        <option value="4:00 PM">4:00 PM</option>
+                        <option value="6:00 PM">6:00 PM</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy;Simple web dev project</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
