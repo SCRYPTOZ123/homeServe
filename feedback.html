@@ -31,6 +31,14 @@
 
     <section class="feedback-section">
         <div class="container">
+            <!-- QUESTION 4: Thank you message (hidden by default) -->
+            <div id="thank-you-message" class="thank-you-message" style="display: none;">
+                <p>✓ Thank you! The form has been cleared.</p>
+            </div>
+
+            <!-- QUESTION 7: Backend save success message -->
+            <div id="backend-success-msg" class="backend-success" style="display: none;"></div>
+
             <div class="feedback-container">
                 <div class="feedback-form-card">
                     <h2>We'd love to hear from you</h2>
@@ -68,15 +76,15 @@
                             <label>Rate Your Experience</label>
                             <div class="rating-container">
                                 <input type="radio" name="rating" id="star5" value="5">
-                                <label for="star5" class="star">â˜…</label>
+                                <label for="star5" class="star">★</label>
                                 <input type="radio" name="rating" id="star4" value="4">
-                                <label for="star4" class="star">â˜…</label>
+                                <label for="star4" class="star">★</label>
                                 <input type="radio" name="rating" id="star3" value="3">
-                                <label for="star3" class="star">â˜…</label>
+                                <label for="star3" class="star">★</label>
                                 <input type="radio" name="rating" id="star2" value="2">
-                                <label for="star2" class="star">â˜…</label>
+                                <label for="star2" class="star">★</label>
                                 <input type="radio" name="rating" id="star1" value="1">
-                                <label for="star1" class="star">â˜…</label>
+                                <label for="star1" class="star">★</label>
                             </div>
                         </div>
 
@@ -100,7 +108,11 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn-submit">Submit Feedback</button>
+                        <div class="form-buttons">
+                            <button type="submit" class="btn-submit">Submit Feedback</button>
+                            <!-- QUESTION 4: Clear form button -->
+                            <button type="button" id="clear-form-btn" class="btn-clear">Clear Form</button>
+                        </div>
                     </form>
                 </div>
 

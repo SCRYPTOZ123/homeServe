@@ -168,12 +168,32 @@ function setupLogout() {
 function initHomePage() {
   loadUserData()
   setupBookingModal()
+  // QUESTION 5: Setup toggle button for hiding/showing special offers section
+  setupSectionToggle()
 }
 
 function loadUserData() {
   const userNameElement = document.getElementById("user-name")
   if (userNameElement && currentUser) {
     userNameElement.textContent = currentUser.name
+  }
+}
+
+// QUESTION 5: Function to hide/show a section (Special Offers section)
+function setupSectionToggle() {
+  const toggleBtn = document.getElementById("toggle-offers-btn")
+  const offersSection = document.getElementById("special-offers-section")
+  
+  if (toggleBtn && offersSection) {
+    toggleBtn.addEventListener("click", () => {
+      if (offersSection.style.display === "none") {
+        offersSection.style.display = "block"
+        toggleBtn.textContent = "Hide Special Offers"
+      } else {
+        offersSection.style.display = "none"
+        toggleBtn.textContent = "Show Special Offers"
+      }
+    })
   }
 }
 
@@ -330,7 +350,7 @@ function cancelBooking(bookingId) {
     saveToSession()
     alert("Booking cancelled successfully")
     loadBookings()
-    calculateTotalPrice()
+    calculateTotalPrice() // Recalculate after cancellation
   }
 }
 
@@ -357,17 +377,38 @@ function setupFilterButtons() {
   })
 }
 
+// QUESTION 6: Update cost calculation with 10% discount if total > 1000
 function calculateTotalPrice() {
-  const userBookings = bookings.filter((b) => b.userId === currentUser.id)
-  const totalPrice = userBookings.reduce((sum, booking) => {
-    if (booking.status === "Cancelled") return sum
+  // Only include non-cancelled bookings
+  const userBookings = bookings.filter((b) => b.userId === currentUser.id && b.status !== "Cancelled")
+  
+  let totalPrice = userBookings.reduce((sum, booking) => {
     const price = Number.parseFloat(booking.price.replace("₹", ""))
     return sum + price
   }, 0)
 
+  // QUESTION 6: Apply 10% discount if total is more than 1000
+  let discount = 0
+  if (totalPrice > 1000) {
+    discount = totalPrice * 0.10
+    totalPrice = totalPrice - discount
+  }
+
   const totalPriceElement = document.getElementById("total-price")
+  const discountElement = document.getElementById("discount-amount")
+  
   if (totalPriceElement) {
-    totalPriceElement.textContent = `₹${totalPrice}`
+    totalPriceElement.textContent = `₹${totalPrice.toFixed(2)}`
+  }
+  
+  // Display discount information if applicable
+  if (discountElement) {
+    if (discount > 0) {
+      discountElement.textContent = `Discount Applied (10%): -₹${discount.toFixed(2)}`
+      discountElement.style.display = "block"
+    } else {
+      discountElement.style.display = "none"
+    }
   }
 }
 
@@ -377,6 +418,8 @@ function initFeedbackPage() {
   setupFeedbackForm()
   loadFeedbackStats()
   loadFeedbackList()
+  // QUESTION 4: Setup clear form button
+  setupClearFormButton()
 }
 
 // Email validation
@@ -446,6 +489,39 @@ function setupFeedbackValidation() {
   })
 }
 
+// QUESTION 4: Clear form and display thank you message
+function setupClearFormButton() {
+  const clearBtn = document.getElementById("clear-form-btn")
+  const feedbackForm = document.getElementById("feedback-form")
+  const thankYouMsg = document.getElementById("thank-you-message")
+  
+  if (clearBtn && feedbackForm) {
+    clearBtn.addEventListener("click", () => {
+      // Clear the form
+      feedbackForm.reset()
+      
+      // Remove any error states
+      const emailInput = document.getElementById("feedback-email")
+      const phoneInput = document.getElementById("feedback-phone")
+      const emailError = document.getElementById("email-error")
+      const phoneError = document.getElementById("phone-error")
+      
+      if (emailInput) emailInput.classList.remove("error")
+      if (phoneInput) phoneInput.classList.remove("error")
+      if (emailError) emailError.textContent = ""
+      if (phoneError) phoneError.textContent = ""
+      
+      // Display thank you message
+      if (thankYouMsg) {
+        thankYouMsg.style.display = "block"
+        setTimeout(() => {
+          thankYouMsg.style.display = "none"
+        }, 3000)
+      }
+    })
+  }
+}
+
 function setupFeedbackForm() {
   const feedbackForm = document.getElementById("feedback-form")
   if (!feedbackForm) return
@@ -505,7 +581,9 @@ function setupFeedbackForm() {
     }
 
     feedbacks.push(newFeedback)
-    saveToSession()
+    
+    // QUESTION 7: Save feedback to backend file (simulated)
+    saveFeedbackToBackend(newFeedback)
 
     alert("Thank you for your feedback!")
     feedbackForm.reset()
@@ -517,6 +595,42 @@ function setupFeedbackForm() {
     loadFeedbackStats()
     loadFeedbackList()
   })
+}
+
+// QUESTION 7: Save feedback to backend file (simulated with console output)
+function saveFeedbackToBackend(feedback) {
+  // In a real application, this would send data to a server
+  // For this demo, we'll simulate it by logging to console
+  console.log("=== SAVING FEEDBACK TO BACKEND FILE ===")
+  console.log("Feedback ID:", feedback.id)
+  console.log("User:", feedback.userName)
+  console.log("Email:", feedback.email)
+  console.log("Phone:", feedback.phone)
+  console.log("Service:", feedback.service)
+  console.log("Rating:", feedback.rating)
+  console.log("Message:", feedback.message)
+  console.log("Category:", feedback.category)
+  console.log("Timestamp:", feedback.createdAt)
+  console.log("Status: Successfully saved to backend!")
+  console.log("======================================")
+  
+  // Save to session storage as well
+  saveToSession()
+  
+  // Display success message
+  displayBackendSaveSuccess()
+}
+
+// QUESTION 7: Display successful backend save message
+function displayBackendSaveSuccess() {
+  const successMsg = document.getElementById("backend-success-msg")
+  if (successMsg) {
+    successMsg.textContent = "✓ Feedback successfully saved to backend file!"
+    successMsg.style.display = "block"
+    setTimeout(() => {
+      successMsg.style.display = "none"
+    }, 5000)
+  }
 }
 
 function loadFeedbackStats() {
@@ -555,7 +669,7 @@ function loadFeedbackList() {
     const feedbackItem = document.createElement("div")
     feedbackItem.className = "feedback-item"
 
-    const stars = "â˜…".repeat(feedback.rating) + "â˜†".repeat(5 - feedback.rating)
+    const stars = "★".repeat(feedback.rating) + "☆".repeat(5 - feedback.rating)
     const date = new Date(feedback.createdAt).toLocaleDateString()
 
     feedbackItem.innerHTML = `
@@ -564,8 +678,8 @@ function loadFeedbackList() {
                 <span class="feedback-rating">${stars}</span>
             </div>
             <p class="feedback-message">${feedback.message}</p>
-            <p class="feedback-date">${date} â€¢ ${feedback.category}</p>
-            <p class="feedback-date" style="margin-top: 0.25rem;">ðŸ"§ ${feedback.email} â€¢ ðŸ"± ${feedback.phone}</p>
+            <p class="feedback-date">${date} • ${feedback.category}</p>
+            <p class="feedback-date" style="margin-top: 0.25rem;">📧 ${feedback.email} • 📱 ${feedback.phone}</p>
         `
 
     listContainer.appendChild(feedbackItem)

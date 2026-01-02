@@ -16,6 +16,9 @@
     --success: #10b981;
     --danger: #ef4444;
     --border: #2a2a2a;
+    --christmas-red: #c41e3a;
+    --christmas-green: #165b33;
+    --gold: #ffd700;
 }
 
 body {
@@ -197,6 +200,127 @@ body {
     color: var(--text-secondary);
 }
 
+/* ==================== QUESTION 5: TOGGLE SECTION ==================== */
+.toggle-section {
+    background: var(--bg-secondary);
+    padding: 1.5rem 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.btn-toggle {
+    background: var(--christmas-green);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-toggle:hover {
+    background: #1a7a42;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ==================== QUESTION 8: SPECIAL OFFERS SECTION ==================== */
+.special-offers {
+    background: linear-gradient(135deg, var(--christmas-red) 0%, var(--christmas-green) 100%);
+    padding: 3rem 0;
+    border-bottom: 3px solid var(--gold);
+}
+
+.special-offers h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: festive-glow 2s ease-in-out infinite;
+}
+
+@keyframes festive-glow {
+    0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); }
+    50% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.5); }
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.offer-card {
+    background: white;
+    color: #333;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    border: 3px solid var(--gold);
+}
+
+.offer-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 12px 24px rgba(255, 215, 0, 0.5);
+}
+
+.offer-badge {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: var(--christmas-red);
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    font-weight: 700;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.offer-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--christmas-green);
+}
+
+.offer-card p {
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.offer-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--christmas-red);
+    margin: 1.5rem 0;
+}
+
+.offer-price span {
+    font-size: 2rem;
+    color: var(--christmas-green);
+}
+
+.offer-validity {
+    font-size: 0.9rem;
+    color: #999;
+    font-style: italic;
+}
+
 /* ==================== SERVICES ==================== */
 .services {
     padding: 4rem 0;
@@ -284,6 +408,31 @@ body {
     background: #059669;
 }
 
+/* QUESTION 4: Clear Form Button */
+.btn-clear {
+    background: var(--danger);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background 0.2s;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.btn-clear:hover {
+    background: #dc2626;
+}
+
+.form-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 .btn-cancel {
     background: var(--danger);
     color: white;
@@ -342,6 +491,60 @@ body {
 .form-group textarea {
     resize: vertical;
     min-height: 80px;
+}
+
+/* Form validation styles */
+.form-group input.error,
+.form-group textarea.error,
+.form-group select.error {
+    border-color: var(--danger);
+}
+
+.validation-error {
+    display: block;
+    color: var(--danger);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    min-height: 1.2rem;
+}
+
+/* ==================== QUESTION 4: THANK YOU MESSAGE ==================== */
+.thank-you-message {
+    background: rgba(16, 185, 129, 0.15);
+    border: 2px solid var(--success);
+    color: var(--success);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    animation: slideIn 0.3s ease-out;
+}
+
+/* QUESTION 7: Backend Success Message */
+.backend-success {
+    background: rgba(37, 99, 235, 0.15);
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ==================== MODAL ==================== */
@@ -481,6 +684,7 @@ body {
     color: var(--danger);
 }
 
+/* QUESTION 6: Total Price Container with Discount */
 .total-price-container {
     max-width: 900px;
     margin: 2rem auto 0;
@@ -499,6 +703,25 @@ body {
 #total-price {
     color: var(--success);
     font-weight: 700;
+}
+
+.discount-text {
+    color: var(--gold);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    animation: highlight 1.5s ease-in-out infinite;
+}
+
+@keyframes highlight {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.discount-info {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
 }
 
 /* ==================== PROFILE ==================== */
@@ -805,5 +1028,13 @@ footer {
     
     .feedback-container {
         grid-template-columns: 1fr;
+    }
+
+    .offers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .special-offers h2 {
+        font-size: 1.8rem;
     }
 }
