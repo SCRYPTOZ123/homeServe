@@ -563,41 +563,6 @@ function setupFeedbackForm() {
 }
 
 
-function saveFeedbackToBackend(feedback) {
-  // In a real application, this would send data to a server
-  // For this demo, we'll simulate it by logging to console
-  console.log("=== SAVING FEEDBACK TO BACKEND FILE ===")
-  console.log("Feedback ID:", feedback.id)
-  console.log("User:", feedback.userName)
-  console.log("Email:", feedback.email)
-  console.log("Phone:", feedback.phone)
-  console.log("Service:", feedback.service)
-  console.log("Rating:", feedback.rating)
-  console.log("Message:", feedback.message)
-  console.log("Category:", feedback.category)
-  console.log("Timestamp:", feedback.createdAt)
-  console.log("Status: thank you for your feedback!")
-  console.log("======================================")
-  
-  // Save to session storage as well
-  saveToSession()
-  
-  // Display success message
-  displayBackendSaveSuccess()
-}
-
-
-function displayBackendSaveSuccess() {
-  const successMsg = document.getElementById("backend-success-msg")
-  if (successMsg) {
-    successMsg.textContent = "thank you for your feedback!"
-    successMsg.style.display = "block"
-    setTimeout(() => {
-      successMsg.style.display = "none"
-    }, 5000)
-  }
-}
-
 function loadFeedbackStats() {
   const userFeedbacks = feedbacks.filter((f) => f.userId === currentUser.id)
   const feedbackCount = userFeedbacks.length
