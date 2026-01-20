@@ -168,8 +168,7 @@ function setupLogout() {
 function initHomePage() {
   loadUserData()
   setupBookingModal()
-  // QUESTION 5: Setup toggle button for hiding/showing special offers section
-  setupSectionToggle()
+  
 }
 
 function loadUserData() {
@@ -179,8 +178,8 @@ function loadUserData() {
   }
 }
 
-// QUESTION 5: Function to hide/show a section (Special Offers section)
-function setupSectionToggle() {
+
+/*function setupSectionToggle() {
   const toggleBtn = document.getElementById("toggle-offers-btn")
   const offersSection = document.getElementById("special-offers-section")
   
@@ -195,7 +194,7 @@ function setupSectionToggle() {
       }
     })
   }
-}
+}*/
 
 function setupBookingModal() {
   const modal = document.getElementById("booking-modal")
@@ -377,7 +376,6 @@ function setupFilterButtons() {
   })
 }
 
-// QUESTION 6: Update cost calculation with 10% discount if total > 1000
 function calculateTotalPrice() {
   // Only include non-cancelled bookings
   const userBookings = bookings.filter((b) => b.userId === currentUser.id && b.status !== "Cancelled")
@@ -387,12 +385,8 @@ function calculateTotalPrice() {
     return sum + price
   }, 0)
 
-  // QUESTION 6: Apply 10% discount if total is more than 1000
-  let discount = 0
-  if (totalPrice > 1000) {
-    discount = totalPrice * 0.10
-    totalPrice = totalPrice - discount
-  }
+  
+  
 
   const totalPriceElement = document.getElementById("total-price")
   const discountElement = document.getElementById("discount-amount")
@@ -418,7 +412,7 @@ function initFeedbackPage() {
   setupFeedbackForm()
   loadFeedbackStats()
   loadFeedbackList()
-  // QUESTION 4: Setup clear form button
+ 
   setupClearFormButton()
 }
 
@@ -487,40 +481,11 @@ function setupFeedbackValidation() {
       }
     }
   })
+
 }
 
-// QUESTION 4: Clear form and display thank you message
-function setupClearFormButton() {
-  const clearBtn = document.getElementById("clear-form-btn")
-  const feedbackForm = document.getElementById("feedback-form")
-  const thankYouMsg = document.getElementById("thank-you-message")
-  
-  if (clearBtn && feedbackForm) {
-    clearBtn.addEventListener("click", () => {
-      // Clear the form
-      feedbackForm.reset()
-      
-      // Remove any error states
-      const emailInput = document.getElementById("feedback-email")
-      const phoneInput = document.getElementById("feedback-phone")
-      const emailError = document.getElementById("email-error")
-      const phoneError = document.getElementById("phone-error")
-      
-      if (emailInput) emailInput.classList.remove("error")
-      if (phoneInput) phoneInput.classList.remove("error")
-      if (emailError) emailError.textContent = ""
-      if (phoneError) phoneError.textContent = ""
-      
-      // Display thank you message
-      if (thankYouMsg) {
-        thankYouMsg.style.display = "block"
-        setTimeout(() => {
-          thankYouMsg.style.display = "none"
-        }, 3000)
-      }
-    })
-  }
-}
+
+
 
 function setupFeedbackForm() {
   const feedbackForm = document.getElementById("feedback-form")
@@ -582,7 +547,7 @@ function setupFeedbackForm() {
 
     feedbacks.push(newFeedback)
     
-    // QUESTION 7: Save feedback to backend file (simulated)
+    
     saveFeedbackToBackend(newFeedback)
 
     alert("Thank you for your feedback!")
@@ -597,7 +562,7 @@ function setupFeedbackForm() {
   })
 }
 
-// QUESTION 7: Save feedback to backend file (simulated with console output)
+
 function saveFeedbackToBackend(feedback) {
   // In a real application, this would send data to a server
   // For this demo, we'll simulate it by logging to console
@@ -611,7 +576,7 @@ function saveFeedbackToBackend(feedback) {
   console.log("Message:", feedback.message)
   console.log("Category:", feedback.category)
   console.log("Timestamp:", feedback.createdAt)
-  console.log("Status: Successfully saved to backend!")
+  console.log("Status: thank you for your feedback!")
   console.log("======================================")
   
   // Save to session storage as well
@@ -621,11 +586,11 @@ function saveFeedbackToBackend(feedback) {
   displayBackendSaveSuccess()
 }
 
-// QUESTION 7: Display successful backend save message
+
 function displayBackendSaveSuccess() {
   const successMsg = document.getElementById("backend-success-msg")
   if (successMsg) {
-    successMsg.textContent = "✓ Feedback successfully saved to backend file!"
+    successMsg.textContent = "thank you for your feedback!"
     successMsg.style.display = "block"
     setTimeout(() => {
       successMsg.style.display = "none"
@@ -685,7 +650,73 @@ function loadFeedbackList() {
     listContainer.appendChild(feedbackItem)
   })
 }
+function saveFeedbackToBackend(feedback) {
+  // Save to session storage first
+  saveToSession()
+  
+  // Create content for all feedbacks
+  let allFeedbacksText = `
+==========================================
+HOMESERVE FEEDBACK DATABASE
+==========================================
+Total Feedbacks: ${feedbacks.length}
+Generated: ${new Date().toLocaleString()}
+==========================================
 
+`
+
+  // Add each feedback
+  feedbacks.forEach((fb, index) => {
+    allFeedbacksText += `
+FEEDBACK #${index + 1}
+------------------------------------------
+ID: ${fb.id}
+Date: ${new Date(fb.createdAt).toLocaleString()}
+User: ${fb.userName}
+Email: ${fb.email}
+Phone: ${fb.phone}
+Service: ${fb.service}
+Rating: ${'★'.repeat(fb.rating)}${'☆'.repeat(5 - fb.rating)} (${fb.rating}/5)
+Category: ${fb.category}
+Message: ${fb.message}
+
+`
+  })
+
+  // Download the file
+  downloadTextFile(allFeedbacksText, 'all_feedbacks.txt')
+  
+  // Log to console
+  console.log("=== SAVING ALL FEEDBACKS TO FILE ===")
+  console.log(`Total feedbacks saved: ${feedbacks.length}`)
+  console.log("====================================")
+  
+  // Display success message
+  displayBackendSaveSuccess()
+}
+
+// Function to download text file
+function downloadTextFile(content, filename) {
+  const blob = new Blob([content], { type: 'text/plain' })
+  const downloadLink = document.createElement('a')
+  downloadLink.href = URL.createObjectURL(blob)
+  downloadLink.download = filename
+  document.body.appendChild(downloadLink)
+  downloadLink.click()
+  document.body.removeChild(downloadLink)
+  URL.revokeObjectURL(downloadLink.href)
+}
+
+function displayBackendSaveSuccess() {
+  const successMsg = document.getElementById("backend-success-msg")
+  if (successMsg) {
+    successMsg.textContent = "✓ All feedbacks saved to text file and downloaded!"
+    successMsg.style.display = "block"
+    setTimeout(() => {
+      successMsg.style.display = "none"
+    }, 5000)
+  }
+}
 // ==================== PROFILE PAGE (profile.html) ====================
 function initProfilePage() {
   loadProfile()
