@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeServe - Feedback</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">HomeServe</div>
+                <ul class="nav-links">
+                    <li><a href="home.html">Services</a></li>
+                    <li><a href="bookings.html">My Bookings</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="feedback.html" class="active">Feedback</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Share Your Feedback</h1>
+            <p>Help us improve our services</p>
+        </div>
+    </section>
+
+    <section class="feedback-section">
+        <div class="container">
+          
+            <div id="thank-you-message" class="thank-you-message" style="display: none;">
+                <p>✓ Thank you! The form has been cleared.</p>
+            </div>
+
+            
+            <div id="backend-success-msg" class="backend-success" style="display: none;"></div>
+
+            <div class="feedback-container">
+                <div class="feedback-form-card">
+                    <h2>We'd love to hear from you</h2>
+                    <form id="feedback-form">
+                        <div class="form-group">
+                            <label for="feedback-email">Email *</label>
+                            <input type="email" id="feedback-email" required placeholder="Enter your email">
+                            <span class="validation-error" id="email-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feedback-phone">Phone Number *</label>
+                            <input type="tel" id="feedback-phone" required placeholder="Enter 10-digit phone number" maxlength="10">
+                            <span class="validation-error" id="phone-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feedback-service">Select Service (Optional)</label>
+                            <select id="feedback-service">
+                                <option value="">-- Select a service --</option>
+                                <option value="Bathroom Cleaning">Bathroom Cleaning</option>
+                                <option value="Kitchen Cleaning">Kitchen Cleaning</option>
+                                <option value="Home Cleaning">Home Cleaning</option>
+                                <option value="Plumbing">Plumbing</option>
+                                <option value="Electrical Work">Electrical Work</option>
+                                <option value="AC Repair">AC Repair</option>
+                                <option value="Painting">Painting</option>
+                                <option value="Pest Control">Pest Control</option>
+                                <option value="Carpentry">Carpentry</option>
+                                <option value="General">General Feedback</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Rate Your Experience</label>
+                            <div class="rating-container">
+                                <input type="radio" name="rating" id="star5" value="5">
+                                <label for="star5" class="star">★</label>
+                                <input type="radio" name="rating" id="star4" value="4">
+                                <label for="star4" class="star">★</label>
+                                <input type="radio" name="rating" id="star3" value="3">
+                                <label for="star3" class="star">★</label>
+                                <input type="radio" name="rating" id="star2" value="2">
+                                <label for="star2" class="star">★</label>
+                                <input type="radio" name="rating" id="star1" value="1">
+                                <label for="star1" class="star">★</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feedback-message">Your Feedback *</label>
+                            <textarea id="feedback-message" rows="6" required placeholder="Tell us about your experience..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feedback-category">Feedback Type</label>
+                            <select id="feedback-category" required>
+                                <option value="">-- Select type --</option>
+                                <option value="Service Quality">Service Quality</option>
+                                <option value="Professional Behavior">Professional Behavior</option>
+                                <option value="Pricing">Pricing</option>
+                                <option value="Booking Experience">Booking Experience</option>
+                                <option value="Website/App">Website/App</option>
+                                <option value="Suggestion">Suggestion</option>
+                                <option value="Complaint">Complaint</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="submit" class="btn-submit">Submit Feedback</button>
+                
+                        </div>
+                    </form>
+                </div>
+
+                <div class="feedback-stats-card">
+                    <h3>Your Feedback History</h3>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <span class="stat-number" id="feedback-count">0</span>
+                            <span class="stat-text">Feedbacks Given</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number" id="avg-rating">0.0</span>
+                            <span class="stat-text">Average Rating</span>
+                        </div>
+                    </div>
+
+                    <div id="feedback-list">
+                        <p class="empty-message">No feedback submitted yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 HomeServe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
